@@ -25,12 +25,17 @@ def rev(EcoRI): #역순 염기서열
 
 def cke(EcoRI, pattern): #제한효소자리 검사
     pattern_list = []
-    for i in range(0, len(EcoRI) - len(pattern)) :
-        if EcoRI[i:i+len(pattern)] == pattern : 
-            pattern_list.append((i+1, EcoRI[i:i+len(pattern)]))
-    return pattern_list
+    if len(pattern)!=len(comp(pattern)): #염기서열 오류 검사
+        print('염기서열의 일부(전부)가 ATCG로 이루어지지 않았습니다.')
+        return '찡긋' #?????????
+    
+    else:
+        for i in range(0, len(EcoRI) - len(pattern)) :
+            if EcoRI[i:i+len(comp(pattern))] == comp(pattern) :
 
-pattern = comp(input('사용할 제한효소의 염기서열을입력해주세요.').upper())
+                pattern_list.append((i+1, EcoRI[i:i+len(comp(pattern))]))    
+        return pattern_list
+pattern =(input('사용할 제한효소의 염기서열을입력해주세요.').upper())
 i = cke(EcoRI, pattern)
 print(i)
 
