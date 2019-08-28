@@ -1,4 +1,5 @@
 
+
 # coding: utf-8
 
 # In[3]:
@@ -23,6 +24,8 @@ def rev(EcoRI): #역순 염기서열
             EcoRI_rev = EcoRI_rev + comp_dict[char]
     return EcoRI_rev
 
+pattern = comp(input('사용할 제한효소의 염기서열을입력해주세요.').upper())
+
 def cke(EcoRI, pattern): #제한효소자리 검사
     pattern_list = []
     for i in range(0, len(EcoRI) - len(pattern)) :
@@ -30,7 +33,9 @@ def cke(EcoRI, pattern): #제한효소자리 검사
             pattern_list.append((i+1, EcoRI[i:i+len(pattern)]))
     return pattern_list
 
-pattern = comp(input('사용할 제한효소의 염기서열을입력해주세요.').upper())
 i = cke(EcoRI, pattern)
-print(i)
+if len(i) == 0 :
+    print('제한효소에 결합할 수 있는 염기서열이 존재하지 않습니다')
+else :
+    print(i)
 
